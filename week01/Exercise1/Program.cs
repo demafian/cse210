@@ -4,6 +4,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello World! This is the Exercise1 Project.");
+        var person = new Person();
+        person.PromptForName();
+        Console.WriteLine($"\nYour name is {person.GetFormalName()}");
     }
 }

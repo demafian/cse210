@@ -1,9 +1,4 @@
-using System;
+﻿using ConsoleApp1; // This tells this file to look in our namespace
 
-class Program
-{
-    static void Main(string[] args)
-    {
-        Console.WriteLine("Hello World! This is the Sandbox Project.");
-    }
-}
+Assignment mathHomework = new Assignment("Thabiso", "Fractions");
+mathHomework.DisplayDetails();

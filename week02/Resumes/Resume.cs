@@ -5,7 +5,7 @@ public class Resume
 {
     public string _name;
 
-    // Initialize the list to avoid "null reference" errors
+    // List to hold Job objects
     public List<Job> _jobs = new List<Job>();
 
     public void Display()
@@ -13,10 +13,9 @@ public class Resume
         Console.WriteLine($"Name: {_name}");
         Console.WriteLine("Jobs:");
 
-        // Iterate through each job in the list
+        // Display each job in the resume
         foreach (Job job in _jobs)
         {
-            // Call the Display method from the Job class
             job.Display();
         }
     }

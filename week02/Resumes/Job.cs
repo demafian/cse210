@@ -2,7 +2,7 @@ using System;
 
 public class Job
 {
-    // Member variables
+    // Attributes
     public string _jobTitle;
     public string _company;
     public int _startYear;

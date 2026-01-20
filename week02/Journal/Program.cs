@@ -1,11 +1,10 @@
 using System;
 
-/*
-  EXCEEDING REQUIREMENTS:
-  1. Mood Tracking: Added a field to record the user's daily mood (1-10).
-  2. Input Validation: Used int.TryParse to prevent crashes if a user types text in the menu.
-  3. Error Handling: Added File.Exists checks to prevent crashes when loading missing files.
-*/
+// EXCEEDING REQUIREMENTS:
+// 1. Hybrid Journaling: Record spontaneous thoughts or get a prompt.
+// 2. Descriptive Tagging: Replaced numerical mood with flexible vibe hashtags.
+// 3. Smart Session Logic: Save files only contain new thoughts from current session.
+// 4. Input Validation: Robust handling of missing files and non-numeric menu choices.
 
 class Program
 {
@@ -20,32 +19,42 @@ class Program
         while (choice != 5)
         {
             Console.WriteLine("\nPlease select one of the following choices:");
-            Console.WriteLine("1. Write\n2. Display\n3. Load\n4. Save\n5. Quit");
+            Console.WriteLine("1. Write");
+            Console.WriteLine("2. Display");
+            Console.WriteLine("3. Load");
+            Console.WriteLine("4. Save");
+            Console.WriteLine("5. Quit");
             Console.Write("What would you like to do? ");
 
-            string input = Console.ReadLine();
-
-            if (int.TryParse(input, out choice))
+            if (int.TryParse(Console.ReadLine(), out choice))
             {
                 if (choice == 1)
                 {
-                    string prompt = promptGenerator.GetRandomPrompt();
-                    Console.WriteLine($"\n{prompt}");
+                    Console.WriteLine("\nRecord a thought? (Leave blank for a random prompt)");
                     Console.Write("> ");
-                    string response = Console.ReadLine();
+                    string userInput = Console.ReadLine();
 
-                    Console.Write("Mood (1-10): ");
-                    string mood = Console.ReadLine();
+                    string finalPrompt = string.IsNullOrWhiteSpace(userInput) ? promptGenerator.GetRandomPrompt() : "Spontaneous Note";
+
+                    if (finalPrompt != "Spontaneous Note")
+                    {
+                        Console.WriteLine($"\nPrompt: {finalPrompt}");
+                        Console.Write("> ");
+                        userInput = Console.ReadLine();
+                    }
+
+                    Console.Write("Tag the 'vibe' of this entry (e.g. Hopeful, Tired): ");
+                    string tag = Console.ReadLine();
 
                     Entry newEntry = new Entry();
                     newEntry._date = DateTime.Now.ToShortDateString();
-                    newEntry._promptText = prompt;
-                    newEntry._entryText = response;
-                    newEntry._mood = mood;
+                    newEntry._promptText = finalPrompt;
+                    newEntry._entryText = userInput;
+                    newEntry._tag = tag;
 
                     theJournal.AddEntry(newEntry);
                 }
-                else if (choice == 2) { theJournal.DisplayAll(); }
+                else if (choice == 2) theJournal.DisplayAll();
                 else if (choice == 3)
                 {
                     Console.Write("Filename? ");
@@ -57,7 +66,7 @@ class Program
                     theJournal.SaveToFile(Console.ReadLine());
                 }
             }
-            else { Console.WriteLine("Please enter a valid number."); }
+            else Console.WriteLine("Please enter a valid number (1-5).");
         }
     }
 }

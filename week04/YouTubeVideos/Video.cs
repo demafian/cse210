@@ -1,39 +1,38 @@
-namespace YouTubeVideos; // Keeps all related code in one "container."
+namespace YouTubeVideos;
 
-public class Video // An "open door" blueprint accessible by any part of the program.
+public class Video
 {
-    // Public Properties: Visible to the outside world for easy reading/display.
-    public string Title { get; set; }
-    public string Author { get; set; }
-    public int Length { get; set; } // Represented in seconds.
-
-    // Private Field: An internal "database" hidden from outside interference.
+    // ENCAPSULATION: Member variables are private with _underscoreCamelCase.
+    private string _title;
+    private string _author;
+    private int _length;
     private List<Comment> _comments = new List<Comment>();
 
-    // Constructor: The "factory setup" that ensures every video is born with a title, author, and length.
     public Video(string title, string author, int length)
     {
-        // Taking the "raw materials" from parameters and assigning them to our public properties.
-        Title = title;
-        Author = author;
-        Length = length;
+        _title = title;
+        _author = author;
+        _length = length;
     }
 
-    // Receiver Method: Acts as the only "gateway" to safely add data to our private internal list.
-    public void AddComment(Comment comment)
-    {
-        _comments.Add(comment);
-    }
+    public void AddComment(Comment comment) => _comments.Add(comment);
 
-    // Reporter Method: Calculates the size of the list and "hands back" the total count as an integer.
-    public int GetCommentCount()
-    {
-        return _comments.Count;
-    }
+    public int GetCommentCount() => _comments.Count;
 
-    // Provider Method: Hands over the entire "box" of comments so they can be displayed.
-    public List<Comment> GetComments()
+    // ABSTRACTION: This method handles the display logic, 
+    // keeping Program.cs clean and focused on high-level flow.
+    public void DisplayVideoDetails()
     {
-        return _comments;
+        Console.WriteLine($"Title: {_title}");
+        Console.WriteLine($"Author: {_author}");
+        Console.WriteLine($"Length: {_length} seconds");
+        Console.WriteLine($"Number of Comments: {GetCommentCount()}");
+        Console.WriteLine("Comments:");
+
+        foreach (Comment comment in _comments)
+        {
+            Console.WriteLine($"  - {comment.GetFormattedComment()}");
+        }
+        Console.WriteLine(new string('-', 40));
     }
 }

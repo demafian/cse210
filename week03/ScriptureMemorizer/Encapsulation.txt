@@ -1,0 +1,33 @@
+W03 Assignment: Explain Encapsulation
+Student: Sizwe Athur Nkosi
+Course: CSE 210
+What is encapsulation and why is it important?
+1. Meaning: Defining the Concept 
+Encapsulation is the fundamental programming practice of bundling data (attributes) and the methods that operate on that data into a single unit called a class. Beyond just grouping them, it involves the principle of "Information Hiding," where direct access to an object's internal components is restricted. By using access modifiers like private, we create a "protective bubble" around the data, ensuring that the internal state of an object can only be changed in controlled, predictable ways.
+2. Benefit: Why we do it 
+The primary benefits of encapsulation are control, security, and maintainability. By making data private, you prevent external parts of the program from accidentally corrupting an object's internal state. This creates "loose coupling," meaning you can update or change how a class works internally—such as optimizing an algorithm or changing a data type—without breaking the rest of the program. It makes the code less "brittle" and much easier to debug.
+3. Application: How it looks in the real world 
+In a real-world application, such as a banking system, you wouldn't want any random part of the software to be able to change a balance variable directly. Instead, you encapsulate the balance and only allow it to be modified through specific Deposit() or Withdraw() methods. These methods act as gatekeepers that verify business rules—such as checking for sufficient funds or valid ID—before any data is changed.
+4. Code: Example from the Scripture Memorizer
+public class Word
+{
+    private string _text;
+    private bool _isHidden;
+
+    public void Hide() => _isHidden = true;
+
+    public string GetDisplayText()
+    {
+        if (_isHidden)
+        {
+            return new string('_', _text.Length);
+        }
+        return _text;
+    }
+}
+
+5. Explanation:
+In this example from my project, the `_text` and `_isHidden` variables are marked as `private`. This is encapsulation in action. The rest of the program (like the `Main` loop) cannot see whether a word is hidden or access the raw text directly. Instead, the program must "ask" the `Word` object for its display version using the `GetDisplayText()` method. 
+
+This is important because it allows the `Word` class to be responsible for its own behavior. If I decide later to change the display from underscores to asterisks or a "blur" effect, I only have to modify the code in this one specific class. Because the rest of the program only cares about the result of `GetDisplayText()`, it will continue to work perfectly without needing any further changes.
+

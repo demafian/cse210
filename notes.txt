@@ -1,0 +1,12 @@
+Notes
+Created: 2026-01-12
+
+- Topic: CSE210
+- Details: 
+
+Quick entries:
+- To avoid these pitfalls, you should never click "Debug Anyway" instead, click "Abort" and track down your errors, or click "Show Errors" to go directly to them.
+- Also, you should make sure that you type every line of code yourself. Do not copy and paste this code. It is important for your learning that you practice writing every line of code.
+- Use static for all of your functions until we start writing classes.
+- 
+- 

@@ -22,7 +22,7 @@ class Program
             while (guess != magicNumber)
             {
                 Console.Write("What is your guess? ");
-                // Using TryParse is a safer way to handle non-number inputs
+                // --- Core Requirement: Input Guess ---
                 string input = Console.ReadLine();
                 
                 if (int.TryParse(input, out guess))
@@ -31,11 +31,11 @@ class Program
 
                     if (magicNumber > guess)
                     {
-                        Console.WriteLine("Higher ↑\n"); // Added arrow and newline
+                        Console.WriteLine("Higher ↑\n"); 
                     }
                     else if (magicNumber < guess)
                     {
-                        Console.WriteLine("Lower ↓\n"); // Added arrow and newline
+                        Console.WriteLine("Lower ↓\n");
                     }
                     else
                     {
